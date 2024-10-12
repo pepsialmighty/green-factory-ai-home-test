@@ -80,3 +80,11 @@ docker-compose up -d
 ```
 
 - Open the application at `http://localhost:3000`
+
+## Authentication
+
+- The app has a simple authentication system and you can sign in using these credential
+
+> - username: user1 - password: 123
+> - username: user2 - password: 123
+> - username: admin - password: admin
