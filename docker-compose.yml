@@ -1,0 +1,6 @@
+version: "3.8"
+services:
+  green-factory-ai-book-search-app:
+    image: pepsidockr/green-factory-ai-book-search-app:latest
+    ports:
+      - "3000:3000"
