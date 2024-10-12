@@ -10,11 +10,14 @@ import LoginForm from "./components/LoginForm";
 import SearchPage from "./components/SearchPage";
 import "./style.scss";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { useAverageSearchDuration } from "./hooks/useUpdateAverageSearchDuration";
 
 const App: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState("");
-  const [averageSearchDuration, setAverageSearchDuration] = useState(0);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [username, setUsername] = useState<string>("");
+  // const [averageSearchDuration, setAverageSearchDuration] = useState<number>(0);
+  const { searchDuration, updateAverageSearchDuration } =
+    useAverageSearchDuration();
 
   const handleLogin = (user: string) => {
     setIsAuthenticated(true);
@@ -28,12 +31,12 @@ const App: React.FC = () => {
     localStorage.removeItem("username");
   };
 
-  const updateAverageSearchDuration = (duration: number) => {
-    setAverageSearchDuration((prevAverage) => {
-      if (prevAverage === 0) return duration;
-      return (prevAverage + duration) / 2;
-    });
-  };
+  // const updateAverageSearchDuration = (duration: number) => {
+  //   setAverageSearchDuration((prevAverage) => {
+  //     if (prevAverage === 0) return duration;
+  //     return (prevAverage + duration) / 2;
+  //   });
+  // };
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
@@ -74,7 +77,7 @@ const App: React.FC = () => {
                     isAuthenticated={isAuthenticated}
                     username={username}
                     onLogout={handleLogout}
-                    averageSearchDuration={averageSearchDuration}
+                    averageSearchDuration={searchDuration.averageDuration}
                   />
                   <SearchPage
                     updateAverageSearchDuration={updateAverageSearchDuration}
