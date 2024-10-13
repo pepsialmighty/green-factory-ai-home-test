@@ -15,7 +15,6 @@ import { useAverageSearchDuration } from "./hooks/useUpdateAverageSearchDuration
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [username, setUsername] = useState<string>("");
-  // const [averageSearchDuration, setAverageSearchDuration] = useState<number>(0);
   const { searchDuration, updateAverageSearchDuration } =
     useAverageSearchDuration();
 
@@ -30,13 +29,6 @@ const App: React.FC = () => {
     setUsername("");
     localStorage.removeItem("username");
   };
-
-  // const updateAverageSearchDuration = (duration: number) => {
-  //   setAverageSearchDuration((prevAverage) => {
-  //     if (prevAverage === 0) return duration;
-  //     return (prevAverage + duration) / 2;
-  //   });
-  // };
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("username");
