@@ -54,7 +54,21 @@ const SearchPage: React.FC<SearchPageProps> = ({
         setTotalResults(response.data.numFound);
         setCurrentPage(page);
       } catch (err) {
-        setError("An error occurred while fetching books. Please try again.");
+        if (axios.isAxiosError(err)) {
+          if (err.response) {
+            setError(
+              `Error ${err.response.status}: ${err.response.data.message}`
+            );
+          } else if (err.request) {
+            setError(
+              "No response received from the server. Please try again later."
+            );
+          } else {
+            setError("An unexpected error occurred. Please try again later.");
+          }
+        } else {
+          setError("An unexpected error occurred. Please try again later.");
+        }
       } finally {
         setLoading(false);
       }
